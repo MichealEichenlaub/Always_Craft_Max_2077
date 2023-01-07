@@ -12,12 +12,16 @@
 
 @replaceMethod(CraftingLogicController)
   protected cb func OnHoldFinished(evt: ref<ProgressBarFinishedProccess>) -> Bool {
+    
     let quantity: Int32;
+
     if !this.m_isPanelOpen {
       return false;
     };
 
-    if this.m_selectedRecipe.id.TagsContains(n"Grenade") || this.m_selectedRecipe.id.TagsContains(n"Consumable") || this.m_selectedRecipe.id.TagsContains(n"Ammo") || Equals(InventoryItemData.GetItemType(this.m_selectedRecipe.inventoryItem), gamedataItemType.Gen_CraftingMaterial) {
+    if this.m_selectedRecipe.id.TagsContains(n"Grenade") || this.m_selectedRecipe.id.TagsContains(n"Consumable") || this.m_selectedRecipe.id.TagsContains(n"Ammo") 
+       || Equals(InventoryItemData.GetItemType(this.m_selectedRecipe.inventoryItem), gamedataItemType.Gen_CraftingMaterial) {
+
       quantity = this.m_craftingSystem.GetMaxCraftingAmount(InventoryItemData.GetGameItemData(this.m_selectedItemData));
       
       if this.m_selectedRecipe.id.TagsContains(n"Ammo") && quantity == 0 {
@@ -32,7 +36,8 @@
 
     if this.m_selectedRecipe.id.TagsContains(n"Ammo") {
       this.CraftItem(this.m_selectedRecipe, quantity);
-    } else {
+    } 
+    else {
       this.CraftItem(this.m_selectedRecipe, this.m_selectedRecipe.amount);
     };
   }
